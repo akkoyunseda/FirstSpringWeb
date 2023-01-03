@@ -1,6 +1,7 @@
 package com.garanti.FirstSpringWeb.model;
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
@@ -10,12 +11,17 @@ public class Ders_Ogrenci
 {
     private Integer ID;
 
+    @NonNull
     private Integer DERS_ID;
 
+    @NonNull
     private Integer OGRENCI_ID;
 
+    @NonNull
     private Integer NOTE;
 
+
+    @NonNull
     private Integer DEVAMSIZLIK;
 
     public Ders_Ogrenci(Integer ID, Integer DERS_ID, Integer OGRENCI_ID)

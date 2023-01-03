@@ -1,30 +1,33 @@
 package com.garanti.FirstSpringWeb.controller;
 
 import com.garanti.FirstSpringWeb.model.Konu;
+import com.garanti.FirstSpringWeb.model.Ogrenci;
 import com.garanti.FirstSpringWeb.model.Ogretmen;
 import com.garanti.FirstSpringWeb.repo.KonuRepo;
 import com.garanti.FirstSpringWeb.repo.OgretmenRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "konu")
 public class KonuController {
+    @Autowired
     private KonuRepo repo;
 
-    public KonuController() {
+    /*public KonuController() {
         this.repo = new KonuRepo();
-    }
+    }*/
 
     @GetMapping(path = "getAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<Konu>> getAll()
+    public ResponseEntity<List<Konu>> getAll()
     {
         // localhost:9090/FirstRestfulService/konu/getAll
-        ArrayList<Konu> res = repo.getAll();
+        List<Konu> res = repo.getAll();
         if (res == null || res.size() == 0)
         {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -33,6 +36,12 @@ public class KonuController {
         {
             return ResponseEntity.ok(res);
         }
+    }
+
+    @GetMapping(path = "findAllByName", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Ogrenci>> getByNameQueryParam(@RequestParam(value = "name",required = true)String name)
+    {
+        return ResponseEntity.ok(this.repo.getAllLike(name));
     }
 
     @GetMapping(path = "getByIdHeader", produces = MediaType.APPLICATION_JSON_VALUE)

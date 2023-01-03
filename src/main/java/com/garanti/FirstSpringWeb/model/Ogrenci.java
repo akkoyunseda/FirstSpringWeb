@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class Ogrenci {
+
     private Integer ID;
 
     @NonNull
@@ -16,6 +17,6 @@ public class Ogrenci {
     @NonNull
     private int OGR_NUMBER;
 
-    @NonNull
+
     private Integer YEAR;
 }

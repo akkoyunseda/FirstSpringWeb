@@ -4,27 +4,30 @@ import com.garanti.FirstSpringWeb.model.Ders_Ogrenci;
 import com.garanti.FirstSpringWeb.model.Ogretmen;
 import com.garanti.FirstSpringWeb.repo.Ders_OgrenciRepo;
 import com.garanti.FirstSpringWeb.repo.OgretmenRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "ders_ogrenci")
 public class Ders_OgrenciController {
+    @Autowired
     private Ders_OgrenciRepo repo;
 
-    public Ders_OgrenciController() {
+    /*public Ders_OgrenciController() {
         this.repo = new Ders_OgrenciRepo();
-    }
+    }*/
 
     @GetMapping(path = "getAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<Ders_Ogrenci>> getAll()
+    public ResponseEntity<List<Ders_Ogrenci>> getAll()
     {
         // localhost:9090/FirstRestfulService/ders_ogrenci/getAll
-        ArrayList<Ders_Ogrenci> res = repo.getAll();
+        List<Ders_Ogrenci> res = repo.getAll();
         if (res == null || res.size() == 0)
         {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

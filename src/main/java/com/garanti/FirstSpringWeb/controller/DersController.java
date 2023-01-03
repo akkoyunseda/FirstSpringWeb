@@ -1,33 +1,36 @@
 package com.garanti.FirstSpringWeb.controller;
 
 import com.garanti.FirstSpringWeb.model.Ders;
+import com.garanti.FirstSpringWeb.model.Ogrenci;
 import com.garanti.FirstSpringWeb.model.Ogretmen;
 import com.garanti.FirstSpringWeb.repo.DersRepo;
 import com.garanti.FirstSpringWeb.repo.OgretmenRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "ders")
 // localhost:9090/FirstSpringWeb/ders
 public class DersController
 {
+    @Autowired
     private DersRepo repo;
 
-    public DersController()
+    /*public DersController()
     {
         this.repo = new DersRepo();
-    }
+    }*/
 
     @GetMapping(path = "getAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<Ders>> getAll()
+    public ResponseEntity<List<Ders>> getAll()
     {
         // localhost:9090/FirstRestfulService/ders/getAll
-        ArrayList<Ders> res = repo.getAll();
+        List<Ders> res = repo.getAll();
         if (res == null || res.size() == 0)
         {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -37,6 +40,7 @@ public class DersController
             return ResponseEntity.ok(res);
         }
     }
+
 
     @GetMapping(path = "getByIdHeader", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Ders> getByIdHeader(@RequestHeader(name = "id") Integer id)

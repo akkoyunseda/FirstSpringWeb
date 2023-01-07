@@ -1,6 +1,7 @@
 package com.garanti.FirstSpringWeb.controller;
 
 import com.garanti.FirstSpringWeb.model.Ders;
+import com.garanti.FirstSpringWeb.model.Konu;
 import com.garanti.FirstSpringWeb.model.Ogrenci;
 import com.garanti.FirstSpringWeb.model.Ogretmen;
 import com.garanti.FirstSpringWeb.repo.DersRepo;
@@ -96,6 +97,7 @@ public class DersController
         // localhost:9090/FirstRestfulService/ogretmen/save
         // {"name":"RestTest", "is_GICIK": true}
         if (repo.save(ders))
+        /*if (repo.saveTransactional(new Ogretmen("transactional test", true), new Konu("transactional konu")))*/
         {
             return ResponseEntity.status(HttpStatus.CREATED).body("Başarı ile kaydedildi");
         }
